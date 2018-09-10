@@ -1,0 +1,19 @@
+/**
+ * 轮播css
+ */
+.pointer{position:absolute;bottom:10px;left:0;right:0;z-index:50;text-align:center;line-height:0;}
+.pointer i{display:inline-block;width:10px;height:10px;margin:0 0 0 5px;border-radius:50%;cursor:pointer;background:#ccc;}
+.pointer i:first-child{margin-left:0;}
+.pointer i:hover{background:#999;}
+.pointer i.selected{background:#999;}
+.slide{display:inline-block;position:relative;height:325px;overflow:hidden;width:100%;}
+.slide a{display: block;height:325px;background-position:center center;background-repeat:no-repeat;background-size:cover;}
+.slide ul,.slide li{position:absolute;top:0;left:0;width:100%;height:100%;}
+.slide li{opacity:0;-webkit-transition:all 0.5s ease-out;-moz-transition:all 0.5s ease-out;-ms-transition:all 0.5s ease-out;transition:all 0.5s ease-out;}
+.slide li.selected{opacity:1;}
+.slide-x li{transform:translateX(-100%);}
+.slide-x li.selected{transform:translateX(0);}
+.slide-x li.selected ~ li{transform:translateX(100%);}
+.slide-z li:first-child{opacity:1;-webkit-transform:scale(1);-moz-transform:scale(1);-ms-transform:scale(1);transform:scale(1);-webkit-transition:transform 0.5s ease-out,opacity 0.5s ease-out;-moz-transition:transform 0.5s ease-out,opacity 0.5s ease-out;-ms-transition:transform 0.5s ease-out,opacity 0.5s ease-out;transition:transform 0.5s ease-out,opacity 0.5s ease-out;}
+.slide-z li{opacity:0;-webkit-transform:scale(1.2);-moz-transform:scale(1.2);-ms-transform:scale(1.2);transform:scale(1.2);}
+.slide-z li.selected{opacity:1;-webkit-transform:scale(1);-moz-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}

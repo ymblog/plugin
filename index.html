@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8">
+<title>插件库</title>
+<meta name="description" content="移动端实用动画库和ui库">
+<meta name="keywords" content="移动端实用动画库和ui库">
+<meta name="applicable-device" content="mobile">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/slide.css">
+<link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+	<div class="contain" id="contain">
+		<h2>插件库</h2>
+        <h3><span>代码仓库</span></h3>
+        <div class="desc">
+            github : <a href="https://github.com/ymblog/plugin">github</a>
+        </div>
+        <h3><span>轮播</span></h3>
+        <div class="desc">
+            <p>1、使用绝对定位+css3来设计,提供三种轮播效果1、滑动2、渐变3、缩放。</p>
+            <p>2、滑动重点是使用css的~选择器,使用起来比较高效和便捷。</p>
+        </div>
+        <div class="item-box">
+            <div class="slide" id="slide">
+                <ul>
+                    <li><a href="javascript:;" style="background-image:url(./images/banner1.jpg)"></a></li>
+                    <li><a href="javascript:;" style="background-image:url(./images/banner2.jpg)"></a></li>
+                </ul>
+            </div>
+        </div>
+		<h3><span>移动端预览压缩</span></h3>
+		<div class="desc">
+            <p>1、使用FileReader移动端浏览器目前一般都可以兼容。</p>
+            <p>2、使用canvas压缩，解决在移动端一般图片大小为3m左右,在网速一般情况下,上传消化时间比较久,体验比较差的问题。(ios有bug，使用瓦片绘制canvas);</p>
+            <p>3、base64图片编码转换成blob上传到服务器,解决过长base64传输慢的问题。
+            <p></p>具体实现代码：<a href="https://segmentfault.com/a/1190000006101416" target="_blank">segmentfault技术贴</a></div>
+		<div class="item-box">
+			<div class="img-contain">
+		        <div class="add" id="add"><span>+</span></div>
+		        <img src="" id="pic"/>
+		        <input type="file" id="upload" class="upload" accept="image/*" multiple />
+		    </div>
+		</div>
+        <h3><span>图片的懒加载</span></h3>
+        <div class="desc">原理：使用滚动节流,减小多次滚动执行代码的效率问题</div>
+        <div class="item-box">
+            <img class="lazyload" data-original="./images/banner1.jpg" src="./images/preload.png">
+            <img class="lazyload" data-original="./images/banner2.jpg" src="./images/preload.png">
+        </div>
+		<h3><span>弹窗</span></h3>
+		<div class="item-box">
+			<a href="javascript:;" id="alert" class="ui-btn">点击信息弹窗</a>
+			<a href="javascript:;" id="confirm" class="ui-btn">点击确认弹窗</a>
+		</div>
+		<h3><span>表单验证</span></h3>
+		<div class="item-box">
+			<form class="model-main" id="form">
+				<input type="text" class="ui-input u-text" placeholder="输入电话号码" data-validate-text="用户名" data-validate="require;mobile" />
+				<span class="ui-form-message"></span>
+				<input type="submit" id="submit" class="ui-btn" value="提交" style="display:block;margin:30px auto;">
+			</form>
+		</div>
+		<h3><span>倒计时</span></h3>
+		<div class="desc">原理：这个主要是对活动倒计时进行代码的封装，因为倒计时比较伤性能，所以进行了代码优化能够减少冗余的代码</div>
+		<div class="item-box">
+			<div class="timer"></div>
+		</div>
+	</div>
+	<div id="particles-js"></div>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="./js/require.js"></script>
+	<script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+	<script>
+		require(['./js/dialog','./js/model','./js/validator','./js/timer','./js/slide','./js/lazyLoading','./js/imgUpload'], function (dialog,model,validator,timer,slide,lazyload,upload){
+			$('#contain').addClass('contain-show');
+            //轮播
+			slide({
+				target:document.getElementById('slide'),
+		        type:'slide-x',//type有三种：1、空或者slide（默认）2、slide-x 3、slide-z
+		        autoPlay:5000//切换的时间单位ms
+		    });
+            //图片上传
+            upload({
+                target:'#upload',
+                success:function(data){
+                    console.log(data);
+                    $('#pic').attr('src',data.src).show();
+                    $('#add').hide();
+                }
+            });
+            //弹窗
+			$('#alert').on('click',function(){
+				dialog.layer({
+					type:'alert',
+					text:'信息弹窗'
+				});
+			});
+			$('#confirm').on('click',function(){
+				dialog.layer({
+					type:'confirm',
+					text:'删除成功',
+					ok:function(){
+						dialog.layer({
+							type:'alert',
+							text:'删除成功'
+						});
+					}
+				});
+			});
+            //表单验证
+			validator({
+				target:'#form'
+			});
+            //倒计时
+			timer({
+				target:document.querySelector('.timer'),//使用js获取
+				time:300,//剩余的秒数 单位s
+				//可选 选择默认即可不需要设置参数
+				/*show:'hms',//hms为时分秒(默认) dhms为天时分秒 ms为分秒
+				type:1//1为00:00:000(默认) 2为00时00分00秒*/
+				//callback:end//倒计时结束执行的函数(默认不执行)
+			});
+            //懒加载
+			lazyload(); 
+		});
+        //粒子
+		particlesJS('particles-js',
+           {
+            "particles": {
+                number: {
+                    value: 20,
+                    density: {
+                        enable: !0,
+                        value_area: 1E3
+                    }
+                },
+                color: {
+                  value: "#e1e1e1"
+                },
+                shape: {
+                  type: "circle",
+                  stroke: {
+                      width: 0,
+                      color: "#000000"
+                  },
+                  polygon: {
+                      nb_sides: 5
+                  },
+                  image: {
+                      src: "img/github.svg",
+                      width: 100,
+                      height: 100
+                  }
+                },
+                opacity: {
+                  value: .5,
+                  random: !1,
+                  anim: {
+                      enable: !1,
+                      speed: 1,
+                      opacity_min: .1,
+                      sync: !1
+                  }
+                },
+                size: {
+                  value: 15,
+                  random: !0,
+                  anim: {
+                      enable: !1,
+                      speed: 180,
+                      size_min: .1,
+                      sync: !1
+                  }
+                },
+                line_linked: {
+                  enable: !0,
+                  distance: 650,
+                  color: "#cfcfcf",
+                  opacity: .26,
+                  width: 1
+                },
+                move: {
+                  enable: !0,
+                  speed: 2,
+                  direction: "none",
+                  random: !0,
+                  straight: !1,
+                  out_mode: "out",
+                  bounce: !1,
+                  attract: {
+                      enable: !1,
+                      rotateX: 600,
+                      rotateY: 1200
+                  }
+                }
+           },
+           interactivity: {
+              detect_on: "canvas",
+              events: {
+                  onhover: {
+                      enable: !1,
+                      mode: "repulse"
+                  },
+                  onclick: {
+                      enable: !1,
+                      mode: "push"
+                  },
+                  resize: !0
+              },
+              modes: {
+                  grab: {
+                      distance: 400,
+                      line_linked: {
+                          opacity: 1
+                      }
+                  },
+                  bubble: {
+                      distance: 400,
+                      size: 40,
+                      duration: 2,
+                      opacity: 8,
+                      speed: 3
+                  },
+                  repulse: {
+                      distance: 200,
+                      duration: .4
+                  },
+                  push: {
+                      particles_nb: 4
+                  },
+                  remove: {
+                      particles_nb: 2
+                  }
+              }
+          },
+          }
+        );
+	</script>
+</body>
+</html>
