@@ -74,14 +74,12 @@ define(['./model'], function(model){
 				btnMain.append('<a href="javascript:;" class="ui-btn l-dialog-cancel">'+ noText +'</a><a href="javascript:;" class="ui-btn l-dialog-ok">'+ okText +'</a>');
 				btnMain.find('.l-dialog-ok').click(function(){
 					model.ui.dialog.close();
-					timer&&clearTimeout(timer);
 					if( model.base.isFunction(ok) ){
 						ok();
 					}
 				});
 				btnMain.find('.l-dialog-cancel').click(function(){
 					model.ui.dialog.close();
-					timer&&clearTimeout(timer);
 					if( model.base.isFunction(no) ){
 						no();
 					}
@@ -129,6 +127,7 @@ define(['./model'], function(model){
 		*/
 		close: function(id){
 			$('#l-ui-wrap').html('');
+			timer&&clearTimeout(timer);
 			if( !$('.l-ui-mask').length ){
 				model.ui.unlock();
 			}
