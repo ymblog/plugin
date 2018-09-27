@@ -19,6 +19,7 @@ define(['./model'], function(model){
 				isMaskClose   = o.isMaskClose === undefined || o.isMaskClose,      //是否点击遮罩关闭
 				allowClose    = o.allowClose === undefined || o.allowClose,        //允许关闭
 				allowEscClose = o.allowEscClose === undefined || o.allowEscClose,  //允许esc关闭
+				timer         = '',
 				wrapId        = 'l-dialog-wrap';
 			var box = '';
 				box += '<div class="l-dialog-wrap" id="'+ wrapId +'" style="width:'+ width +'px">';
@@ -73,12 +74,14 @@ define(['./model'], function(model){
 				btnMain.append('<a href="javascript:;" class="ui-btn l-dialog-cancel">'+ noText +'</a><a href="javascript:;" class="ui-btn l-dialog-ok">'+ okText +'</a>');
 				btnMain.find('.l-dialog-ok').click(function(){
 					model.ui.dialog.close();
+					timer&&clearTimeout(timer);
 					if( model.base.isFunction(ok) ){
 						ok();
 					}
 				});
 				btnMain.find('.l-dialog-cancel').click(function(){
 					model.ui.dialog.close();
+					timer&&clearTimeout(timer);
 					if( model.base.isFunction(no) ){
 						no();
 					}
@@ -151,7 +154,7 @@ define(['./model'], function(model){
 				default://普通的提示
 					o.title = '提示';
 					o.isShowBtn = false;
-					setTimeout(function(){
+					timer = setTimeout(function(){
 						_this.close();
 						if( endFn && typeof endFn === 'function' ){
 							endFn();
