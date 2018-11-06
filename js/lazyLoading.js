@@ -43,9 +43,9 @@ define(function(){
 				sHight = $(window).scrollTop();
 			for (var i = 0,len = $images.length;i < len; i++) {
 				var $image = $images.eq(i);
-		        if($image.attr("data-original") && ($image.offset().top <= sHight + $(window).height())){
-		        	$image.attr("src", $image.attr("data-original")).removeClass("lazyload");
-		        }else if($image.attr("data-original")){
+		        if($image.attr("data-lazy") && ($image.offset().top <= sHight + $(window).height())){
+		        	$image.attr("src", $image.attr("data-lazy")).removeClass("lazyload");
+		        }else if($image.attr("data-lazy")){
 		        	break;
 		        }
 		    }

@@ -127,7 +127,7 @@ h3:before,h3:after{
 }
 .desc{
     margin:0 auto;
-    width:600px;
+    max-width:600px;
     line-height:1.7;
     padding:0 20px;
 }

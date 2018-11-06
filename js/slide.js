@@ -88,8 +88,8 @@ define(function(){
             //自动滚动
             if(this.hasOwnProperty('autoPlayTime')){
                 timer = setInterval(function(){
+                    _this.index = _this.index == _this.len - 1 ?  0 : ++_this.index;
                     _this.reset(_this,_this.index);
-                    _this.index == _this.$lists.length - 1 ?  0 : ++_this.index;
                 },_this.autoPlayTime);
             }
             this.target.addEventListener('mouseover',function(){
@@ -97,8 +97,8 @@ define(function(){
             });
             this.target.addEventListener('mouseout',function(){
                 timer = setInterval(function(){
+                    _this.index = _this.index == _this.len - 1 ?  0 : ++_this.index;
                     _this.reset(_this,_this.index);
-                    _this.index == _this.$lists.length - 1 ?  0 : ++_this.index;
                 },_this.autoPlayTime);
             });
         },

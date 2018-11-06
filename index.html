@@ -38,7 +38,7 @@
 		<h3><span>移动端预览压缩</span></h3>
 		<div class="desc">
             <p>1、使用FileReader移动端浏览器目前一般都可以兼容。</p>
-            <p>2、使用canvas压缩，解决在移动端一般图片大小为3m左右,在网速一般情况下,上传消化时间比较久,体验比较差的问题。(ios有bug，使用瓦片绘制canvas);</p>
+            <p>2、使用canvas压缩，解决在移动端一般图片大小为3m左右,在网速一般情况下,上传消化时间比较久,体验比较差的问题。(ios有bug(图片大于2000000像素就无法使用canvas压缩)，需要使用瓦片绘制canvas);</p>
             <p>3、base64图片编码转换成blob上传到服务器,解决过长base64传输慢的问题。
             <p></p>具体实现代码：<a href="https://segmentfault.com/a/1190000006101416" target="_blank">segmentfault技术贴</a></div>
 		<div class="item-box">
@@ -51,8 +51,8 @@
         <h3><span>图片的懒加载</span></h3>
         <div class="desc">原理：使用滚动节流,减小多次滚动执行代码的效率问题</div>
         <div class="item-box">
-            <img class="lazyload" data-original="./images/banner1.jpg" src="./images/preload.png">
-            <img class="lazyload" data-original="./images/banner2.jpg" src="./images/preload.png">
+            <img class="lazyload" data-lazy="./images/banner1.jpg" src="./images/preload.png">
+            <img class="lazyload" data-lazy="./images/banner2.jpg" src="./images/preload.png">
         </div>
 		<h3><span>弹窗</span></h3>
 		<div class="item-box">
@@ -83,6 +83,7 @@
             //轮播
 			slide({
 				target:document.getElementById('slide'),
+                showArrow:true,
 		        type:'slide-x',//type有三种：1、空或者slide（默认）2、slide-x 3、slide-z
 		        autoPlay:5000//切换的时间单位ms
 		    });
