@@ -16,6 +16,11 @@ define(function(){
 				result = true,
 				str = $.trim(str);
 			switch(type){
+				case 'required'://必填
+					if(str === ''){
+						result = false;
+					}
+					break;
 				case 'mobile'://验证手机格式
 					rule = /^((\+?86)|(\(\+86\)))?(((1[3,4,5,7,8][0-9]))\d{8})$/;
 					break;
@@ -34,16 +39,8 @@ define(function(){
 				case 'image'://验证图片的格式
 					rule = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/;
 					break;
-				case 'special'://验证不能含有特殊字符
-					rule = /[`|~!@#\$%\^\&\*\(\)_\+<>\?:"\{\},\.\\\/;'\[\]=、【】，。/-]/;
-					if(str.match(rule)){
-						return false;
-					} else {
-						return true
-					}
-					break;
 			}
-			if(!str.match(rule)){
+			if(rule && !str.match(rule)){
 				result = false;
 			}
 			return result;
@@ -63,27 +60,31 @@ define(function(){
 			var	that = this,
 				val = _this.val(),
 				result = true,
-				validates = _this.data('validate').split(';');
-			for(var index = 0;index < validates.length;index ++ ){
-				if(validates[index] !== 'required'){
+				validateType = _this.data('validate'),
+				validates = '';
+			//多个验证
+			if(validateType.indexOf(';') > 0){
+				validates = validateType.split(';');
+				for(var index = 0;index < validates.length;index ++ ){
 					result = that.verify(val,validates[index]);
+					//一项验证错误或者最后一项
+					if(!result || index === validates.length - 1){
+						_this.data('validate-result',result);
+						that.verifyRender(_this,val,result);
+						return false;
+					}
 				}
-				//一项验证错误或者最后一项
-				if(!result || index === validates.length - 1){
-					_this.data('validate-result',result);
-					that.verifyRender(_this,val,result);
-					return false;
-				}
+			}else{
+				//单个验证
+				result = that.verify(val,validateType);
+				that.verifyRender(_this,val,result);
 			}
 		},
 		
 		//渲染更新dom
 		verifyRender:function(_this,val,result){
 			$message = _this.siblings('.ui-form-message');
-			if(_this.data('validate').indexOf('required') > -1 && val == ''){
-				$message.html('请输入' + _this.data('validate-text')).fadeIn(500);
-				_this.addClass('l-form-error');
-			}else if(!result){
+			if(!result){
 				$message.html('请输入正确的' + _this.data('validate-text')).fadeIn(500);
 				_this.addClass('l-form-error');
 			}else{

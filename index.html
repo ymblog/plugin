@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="./css/base.css">
 <link rel="stylesheet" href="./css/slide.css">
 <link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="./css/l-dialog.css">
 </head>
 <body>
 	<div class="contain" id="contain">
@@ -60,11 +61,14 @@
 			<a href="javascript:;" id="confirm" class="ui-btn">点击确认弹窗</a>
 		</div>
 		<h3><span>表单验证</span></h3>
-		<div class="item-box">
+		<div class="item-box" style="text-align:left;">
 			<form class="model-main" id="form">
-				<input type="text" class="ui-input u-text" placeholder="输入电话号码" data-validate-text="用户名" data-validate="require;mobile" />
-				<span class="ui-form-message"></span>
-				<input type="submit" id="submit" class="ui-btn" value="提交" style="display:block;margin:30px auto;">
+                <div class="form-item">
+                    电话号码：
+                    <input type="text" class="ui-input u-text" placeholder="输入电话号码" data-validate-text="电话号码" data-validate="required;mobile" />
+                    <span class="ui-form-message"></span>
+                </div>
+                <input type="submit" id="submit" class="ui-btn" value="提交" style="display:block;margin:30px auto;">
 			</form>
 		</div>
 		<h3><span>倒计时</span></h3>
@@ -85,7 +89,7 @@
 				target:document.getElementById('slide'),
                 showArrow:true,
 		        type:'slide-x',//type有三种：1、空或者slide（默认）2、slide-x 3、slide-z
-		        autoPlay:5000//切换的时间单位ms
+		        autoPlayTime:5000//切换的时间单位ms
 		    });
             //图片上传
             upload({
