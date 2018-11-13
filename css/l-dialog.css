@@ -1,12 +1,9 @@
 /* 弹窗 */
-[class*="icon"]{
-    background-image:url(../images/icon.png);
-}
-.icon-close{
-    width: 16px;
-    height: 16px;
-    background-position: 1px -40px;
+.l-ui-close{
+    font-size:24px;
+    font-weight:100;
     cursor: pointer;
+    color:#333;
 }
 #l-ui-wrap{
     position: relative;
@@ -62,7 +59,7 @@
 .l-dialog-close{
     position: absolute;
     right: 15px;
-    top: 15px;
+    top: 2px;
 }
 .l-dialog-btn-wrap{
     text-align: right;

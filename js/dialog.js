@@ -95,7 +95,7 @@ define(['./model'], function(model){
 			
 				/*添加关闭按钮*/
 				dialogMain
-					.prepend('<div class="l-dialog-close"><i class="icon icon-close" title="关闭"></i></div>')
+					.prepend('<div class="l-dialog-close"><span class="l-ui-close" title="关闭">×</span></div>')
 					.find('.l-dialog-close')
 					.click(function(){
 						model.ui.dialog.close();
