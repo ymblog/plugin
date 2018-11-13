@@ -3,7 +3,8 @@
 */
 define(['./model'], function(model){
 	var dialog = {
-		init: function(options){
+		timer:'',
+		init:function(options){
 			var o             = options || {},
 				title         = o.title || '',
 				text          = o.text || '',
@@ -19,7 +20,6 @@ define(['./model'], function(model){
 				isMaskClose   = o.isMaskClose === undefined || o.isMaskClose,      //是否点击遮罩关闭
 				allowClose    = o.allowClose === undefined || o.allowClose,        //允许关闭
 				allowEscClose = o.allowEscClose === undefined || o.allowEscClose,  //允许esc关闭
-				timer         = '',
 				wrapId        = 'l-dialog-wrap';
 			var box = '';
 				box += '<div class="l-dialog-wrap" id="'+ wrapId +'" style="width:'+ width +'px">';
@@ -127,7 +127,7 @@ define(['./model'], function(model){
 		*/
 		close: function(id){
 			$('#l-ui-wrap').html('');
-			timer&&clearTimeout(timer);
+			this.timer != 'undefined' && clearTimeout(this.timer);
 			if( !$('.l-ui-mask').length ){
 				model.ui.unlock();
 			}
@@ -153,7 +153,7 @@ define(['./model'], function(model){
 				default://普通的提示
 					o.title = '提示';
 					o.isShowBtn = false;
-					timer = setTimeout(function(){
+					this.timer = setTimeout(function(){
 						_this.close();
 						if( endFn && typeof endFn === 'function' ){
 							endFn();
