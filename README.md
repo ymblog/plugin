@@ -4,7 +4,7 @@
 ### 项目启动
 打开index.html的文件即可打开项目
 ### 传送门
-[插件库项目](http://lktop.coding.me/ymblog/ym/plugin/)
+[插件库项目](https://ymblog.github.io/plugin/)
 ### 感谢
 喜欢的同学可以顺手给个star支持一下，谢谢！！
 

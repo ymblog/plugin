@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="./css/slide.css">
 <link rel="stylesheet" href="./css/index.css">
 <link rel="stylesheet" href="./css/l-dialog.css">
+<link rel="stylesheet" href="./css/ui-form.css">
 </head>
 <body>
 	<div class="contain" id="contain">
@@ -22,6 +23,26 @@
         <h3><span>代码仓库</span></h3>
         <div class="desc">
             github : <a href="https://github.com/ymblog/plugin">github</a>
+        </div>
+        <h3><span>ui</span></h3>
+        <div class="desc">
+        <input class="ui-switch" type="checkbox">
+            <div class="form-box">
+                <input class="ui-radio" type="radio" name="radio" id="radio1" checked> 
+                <label for="radio1">radio1</label>
+            </div>
+            <div class="form-box">
+                <input class="ui-radio" type="radio" name="radio" id="radio2"> 
+                <label for="radio2">radio2</label>
+            </div>
+            <div class="form-box">
+                <input class="ui-checkbox" type="checkbox" name="layout" id="checkbox1" checked> 
+                <label for="checkbox1">checkbox1</label>
+            </div>
+            <div class="form-box">
+                <input class="ui-checkbox" type="checkbox" name="layout" id="checkbox2"> 
+                <label for="checkbox2">checkbox2</label>
+            </div>
         </div>
         <h3><span>轮播</span></h3>
         <div class="desc">
@@ -61,7 +82,7 @@
 			<a href="javascript:;" id="confirm" class="ui-btn">点击确认弹窗</a>
 		</div>
 		<h3><span>表单验证</span></h3>
-		<div class="item-box" style="text-align:left;">
+		<div class="item-box">
 			<form class="model-main" id="form">
                 <div class="form-item">
                     电话号码：
