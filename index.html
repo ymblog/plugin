@@ -22,6 +22,7 @@
 		<h2>插件库</h2>
         <h3><span>代码仓库</span></h3>
 	<span id="clickme">点击我返回</span>
+	<span id="clickme2">我有缓存</span>
         <div class="desc">
             github : <a href="https://github.com/ymblog/plugin">github</a>
         </div>
@@ -107,6 +108,12 @@
 		$('#clickme').on('click',function(){
 			console.log(111)
 			window.close();
+		})
+		$('#clickme').on('click',function(){
+			dialog.layer({
+				type:'alert',
+				text:localStorage.getItem("Version")
+			});
 		})
 		require(['./js/dialog','./js/model','./js/validator','./js/timer','./js/slide','./js/lazyLoading','./js/imgUpload'], function (dialog,model,validator,timer,slide,lazyload,upload){
 			$('#contain').addClass('contain-show');
