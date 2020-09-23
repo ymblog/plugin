@@ -104,7 +104,8 @@
 	<script src="./js/require.js"></script>
 	<script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
 	<script>
-		$('#clickme').click(()=>{
+		$('#clickme').on('click',function(){
+			console.log(111)
 			window.close();
 		})
 		require(['./js/dialog','./js/model','./js/validator','./js/timer','./js/slide','./js/lazyLoading','./js/imgUpload'], function (dialog,model,validator,timer,slide,lazyload,upload){
