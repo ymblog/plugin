@@ -21,7 +21,8 @@
 	<div class="contain" id="contain">
 		<h2>插件库</h2>
         <h3><span>代码仓库</span></h3>
-	<span id="clickme">点击我返回</span>
+	<span id="clickme">点击我关闭</span>
+	<span id="clickme1">点击我返回</span>
 	<span id="clickme2">我有缓存</span>
         <div class="desc">
             github : <a href="https://github.com/ymblog/plugin">github</a>
@@ -109,7 +110,11 @@
 			console.log(111)
 			window.close();
 		})
-		$('#clickme').on('click',function(){
+		$('#clickme1').on('click',function(){
+			window.histroy.go(-1)
+			window.close();
+		})
+		$('#clickme2').on('click',function(){
 			dialog.layer({
 				type:'alert',
 				text:localStorage.getItem("Version")
