@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./css/ui-form.css">
 </head>
 <body>
+	<span id="clickme">点击我返回</span>
 	<div class="contain" id="contain">
 		<h2>插件库</h2>
         <h3><span>代码仓库</span></h3>
@@ -103,6 +104,9 @@
 	<script src="./js/require.js"></script>
 	<script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
 	<script>
+		$('#clickme').click(()=>{
+			window.close();
+		})
 		require(['./js/dialog','./js/model','./js/validator','./js/timer','./js/slide','./js/lazyLoading','./js/imgUpload'], function (dialog,model,validator,timer,slide,lazyload,upload){
 			$('#contain').addClass('contain-show');
             //轮播
