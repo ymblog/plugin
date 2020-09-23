@@ -106,21 +106,23 @@
 	<script src="./js/require.js"></script>
 	<script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
 	<script>
-		$('#clickme').on('click',function(){
-			console.log(111)
-			window.close();
-		})
-		$('#clickme1').on('click',function(){
-			window.location = document.referrer;
-			window.close();
-		})
-		$('#clickme2').on('click',function(){
-			dialog.layer({
-				type:'alert',
-				text:localStorage.getItem("Version")
-			});
-		})
+
 		require(['./js/dialog','./js/model','./js/validator','./js/timer','./js/slide','./js/lazyLoading','./js/imgUpload'], function (dialog,model,validator,timer,slide,lazyload,upload){
+			$('#clickme').on('click',function(){
+				alert('clickme2');
+				window.close();
+			})
+			$('#clickme1').on('click',function(){
+				alert('clickme1');
+				window.history.back(); 
+				window.location = document.referrer;
+			})
+			$('#clickme2').on('click',function(){
+				dialog.layer({
+					type:'alert',
+					text:localStorage.getItem("Version")
+				});
+			})
 			$('#contain').addClass('contain-show');
             //轮播
 			slide({
